@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     public CharacterController controller;
 
+    public bool isAlive = true; // defaults alive
     public float speed = 6.0F;
     public float jumpSpeed = 8.0F;
     public float gravity = 20.0F;
@@ -50,5 +51,13 @@ public class PlayerController : MonoBehaviour
         }
         moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
+    }
+
+    public void kill() {
+        //player "alive or dead"
+        //disable player object
+        isAlive = false;
+        gameObject.SetActive(false);
+        ////********** death animations
     }
 }

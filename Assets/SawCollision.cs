@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class SawCollision : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        Debug.Log("Player Controller collision 1");
+        if (collision.gameObject.GetComponent<PlayerController>() != null)
+        {
+            Debug.Log("Player Controller collision 2");
+            collision.gameObject.GetComponent<PlayerController>().kill();
+        }
     }
 }
