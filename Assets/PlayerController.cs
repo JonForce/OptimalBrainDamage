@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (gamepad == null && gamepad.enabled)
+        if (gamepad == null || !gamepad.enabled)
             return;
         else
             UpdateControls();
