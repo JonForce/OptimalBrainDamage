@@ -16,18 +16,35 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        this.gamepad = Gamepad.current;
+        
     }
 
     void Update()
     {
+        if (gamepad == null && gamepad.enabled)
+            return;
+        else
+            UpdateControls();
+    }
 
+    public void SetGamepad(Gamepad gamepad)
+    {
+        this.gamepad = gamepad;
+    }
+
+    public Gamepad GetGamepad()
+    {
+        return this.gamepad;
+    }
+
+    private void UpdateControls()
+    {
         if (controller.isGrounded)
         {
-            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            moveDirection = new Vector3(gamepad.leftStick.x.ReadValue(), 0, gamepad.leftStick.y.ReadValue());
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection *= speed;
-            if (Input.GetButton("Jump"))
+            if (gamepad.aButton.ReadValue() > 0)
                 moveDirection.y = jumpSpeed;
 
         }
