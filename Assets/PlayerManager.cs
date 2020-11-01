@@ -7,12 +7,20 @@ using System.Collections;
 public class PlayerManager : MonoBehaviour
 {
     public Object playerPrefab;
-
+    public GameObject camera;
     private ArrayList players = new ArrayList();
 
     // Start is called before the first frame update
     void Start()
     {
+        foreach (InputDevice device in InputSystem.devices)
+        {
+            if (device is Gamepad)
+            {
+                AddNewPlayer(device);
+            }
+        }
+
         InputSystem.onDeviceChange +=
         (device, change) =>
         {
@@ -25,7 +33,7 @@ public class PlayerManager : MonoBehaviour
                         bool deviceAlreadyInUse = false;
                         foreach (Object o in players)
                         {
-                            PlayerController player = (PlayerController) o;
+                            PlayerController player = ((GameObject)o).GetComponent<PlayerController>();
                             if (player.GetGamepad() == device)
                             {
                                 deviceAlreadyInUse = true;
@@ -34,11 +42,7 @@ public class PlayerManager : MonoBehaviour
                         
                         if (!deviceAlreadyInUse)
                         {
-                            Debug.Log("Adding new Player");
-                            GameObject newObject = Instantiate(playerPrefab) as GameObject;
-                            PlayerController newController = newObject.GetComponent<PlayerController>();
-                            players.Add(newController);
-                            newController.SetGamepad((Gamepad)device);
+                            AddNewPlayer(device);
                         }
                     }
                     break;
@@ -59,11 +63,44 @@ public class PlayerManager : MonoBehaviour
                     break;
             }
         };
+
+        GameObject target = new GameObject();
+        camera.GetComponent<LookAt>().target = target.transform;
+        camera.GetComponent<Follow>().target = target.transform;
     }
 
     // Update is called once per frame
     void Update()
     {
+        camera.GetComponent<LookAt>().target.position = GetMeanPlayerPosition();
         
+    }
+
+    private void AddNewPlayer(InputDevice device)
+    {
+        Debug.Log("Adding new Player");
+        GameObject newObject = Instantiate(playerPrefab) as GameObject;
+        PlayerController newController = newObject.GetComponent<PlayerController>();
+        players.Add(newObject);
+        newController.SetGamepad((Gamepad)device);
+    }
+
+    private Vector3 GetMeanPlayerPosition()
+    {
+        float
+            xMean = 0,
+            yMean = 0,
+            zMean = 0;
+        foreach (Object o in players)
+        {
+            GameObject player = ((GameObject)o);
+            xMean += player.transform.position.x;
+            yMean += player.transform.position.y;
+            zMean += player.transform.position.z;
+        }
+        xMean /= players.Count;
+        yMean /= players.Count;
+        zMean /= players.Count;
+        return new Vector3(xMean, yMean, zMean);
     }
 }
