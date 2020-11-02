@@ -16,7 +16,7 @@ public class SawController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        sawBlade.maxAngularVelocity = speed;
+        sawBlade.maxAngularVelocity = speed*20;
         sawBlade.AddTorque(transform.forward);
     }
 }

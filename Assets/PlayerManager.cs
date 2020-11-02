@@ -90,16 +90,25 @@ public class PlayerManager : MonoBehaviour
             xMean = 0,
             yMean = 0,
             zMean = 0;
+        int deadPlayer = 0;
         foreach (Object o in players)
         {
+            
             GameObject player = ((GameObject)o);
-            xMean += player.transform.position.x;
-            yMean += player.transform.position.y;
-            zMean += player.transform.position.z;
+            if (player.GetComponent<PlayerController>().isAlive == true)
+            {
+                xMean += player.transform.position.x;
+                yMean += player.transform.position.y;
+                zMean += player.transform.position.z;
+            }
+            else {
+                deadPlayer++;
+            }
+            
         }
-        xMean /= players.Count;
-        yMean /= players.Count;
-        zMean /= players.Count;
+        xMean /= players.Count-deadPlayer;
+        yMean /= players.Count-deadPlayer;
+        zMean /= players.Count-deadPlayer;
         return new Vector3(xMean, yMean, zMean);
     }
 }
