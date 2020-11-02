@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 734631551581500408}
   - component: {fileID: 734631551581500391}
-  - component: {fileID: 734631551581500390}
   - component: {fileID: 734631551581500409}
   - component: {fileID: 734631551581500388}
   m_Layer: 0
@@ -42,45 +41,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 734631551581500411}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &734631551581500390
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 734631551581500411}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
 --- !u!136 &734631551581500409
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -92,7 +52,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 2.5
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!143 &734631551581500388
@@ -177,6 +137,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 734631553653303022}
+  isAlive: 1
   speed: 6
   jumpSpeed: 8
   gravity: 20
+  runAnimation: {fileID: 1752318280323357396, guid: c5a2c810630f30243b3a3532be83ab65,
+    type: 3}
+  jumpAnimation: {fileID: 2107370762306722653, guid: 19058b98e570dfa428b250f08bec812e,
+    type: 3}
+  idleAnimation: {fileID: 362723506414888512, guid: 3902a03a9f7bcb942a05c5e60acc7dd7,
+    type: 3}

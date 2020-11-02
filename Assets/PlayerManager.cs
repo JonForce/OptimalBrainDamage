@@ -80,6 +80,7 @@ public class PlayerManager : MonoBehaviour
     {
         Debug.Log("Adding new Player " + device.displayName);
         GameObject newObject = Instantiate(playerPrefab) as GameObject;
+        newObject.transform.position = new Vector3(-2 + players.Count * 2, 0, 0);
         PlayerController newController = newObject.GetComponent<PlayerController>();
         players.Add(newObject);
         newController.SetGamepad((Gamepad)device);
