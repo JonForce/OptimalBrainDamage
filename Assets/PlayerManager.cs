@@ -16,6 +16,7 @@ public class PlayerManager : MonoBehaviour
         {
             if (device is Gamepad)
             {
+                Debug.Log("Device : " + device.displayName);
                 AddNewPlayer(device);
             }
         }
@@ -77,7 +78,7 @@ public class PlayerManager : MonoBehaviour
 
     private void AddNewPlayer(InputDevice device)
     {
-        Debug.Log("Adding new Player");
+        Debug.Log("Adding new Player " + device.displayName);
         GameObject newObject = Instantiate(playerPrefab) as GameObject;
         PlayerController newController = newObject.GetComponent<PlayerController>();
         players.Add(newObject);
@@ -86,6 +87,9 @@ public class PlayerManager : MonoBehaviour
 
     private Vector3 GetMeanPlayerPosition()
     {
+        if (players.Count == 0)
+            return new Vector3(0, 0, 0);
+
         float
             xMean = 0,
             yMean = 0,
